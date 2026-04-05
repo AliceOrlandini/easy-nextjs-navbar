@@ -104,7 +104,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
         className={cn('lg:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
       />
       {brandName && (
-        <span className={cn('text-sm font-semibold', classNames.brandName)}>
+        <span className={cn('text-sm font-semibold', classNames.brandName, showBackground && classNames.brandNameSticky)}>
           {brandName}
         </span>
       )}

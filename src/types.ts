@@ -37,6 +37,8 @@ export type NavbarClassNames = {
   logoWrapper?: string;
   /** Brand name <span> rendered next to the logo */
   brandName?: string;
+  /** Brand name <span> modifier applied when the sticky navbar is shown */
+  brandNameSticky?: string;
   /** Brand name <span> modifier applied when the mobile menu is open */
   brandNameOpen?: string;
   /** Each nav item <a> link */
