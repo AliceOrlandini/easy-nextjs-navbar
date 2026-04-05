@@ -2,8 +2,8 @@ export { useScrollThreshold } from './chunk-Q45LC5O3.js';
 import dynamic from 'next/dynamic';
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 
-var DesktopNavbar = dynamic(() => import('./desktop-navbar-ALZAT7HV.js'));
-var MobileNavbar = dynamic(() => import('./mobile-navbar.client-SYFWKVYV.js'));
+var DesktopNavbar = dynamic(() => import('./desktop-navbar-WBK4S7LK.js'));
+var MobileNavbar = dynamic(() => import('./mobile-navbar.client-QVROG75E.js'));
 function Navbar({
   locale,
   items,

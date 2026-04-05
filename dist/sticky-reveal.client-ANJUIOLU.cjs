@@ -1,3 +1,4 @@
+'use client';
 'use strict';
 
 var chunk2KZFQDFU_cjs = require('./chunk-2KZFQDFU.cjs');

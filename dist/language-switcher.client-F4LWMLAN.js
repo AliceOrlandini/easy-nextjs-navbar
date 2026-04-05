@@ -1,3 +1,4 @@
+'use client';
 import { cn } from './chunk-4QY7C7TB.js';
 import Link from 'next/link';
 import Image from 'next/image';

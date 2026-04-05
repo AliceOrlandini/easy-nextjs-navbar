@@ -1,3 +1,4 @@
+'use client';
 'use strict';
 
 var chunkNSB5KGE4_cjs = require('./chunk-NSB5KGE4.cjs');

@@ -1,3 +1,4 @@
+'use client';
 import { useScrollThreshold } from './chunk-Q45LC5O3.js';
 import { cn } from './chunk-4QY7C7TB.js';
 import { jsx } from 'react/jsx-runtime';
