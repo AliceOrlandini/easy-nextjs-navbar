@@ -1,6 +1,7 @@
 import { defineConfig } from 'tsup';
 import { readdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
+import { exec } from 'child_process';
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -39,5 +40,12 @@ export default defineConfig({
         }
       })
     );
+    exec('yalc push', (error, stdout) => {
+      if (error) {
+        console.error(`Errore durante yalc push: ${error.message}`);
+        return;
+      }
+      console.log(`[yalc] ${stdout.trim()}`);
+    });
   },
 });

@@ -2,8 +2,8 @@ export { useScrollThreshold } from './chunk-Q45LC5O3.js';
 import dynamic from 'next/dynamic';
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 
-var DesktopNavbar = dynamic(() => import('./desktop-navbar-WBK4S7LK.js'));
-var MobileNavbar = dynamic(() => import('./mobile-navbar.client-QVROG75E.js'));
+var DesktopNavbar = dynamic(() => import('./desktop-navbar-FLCXLWZL.js'));
+var MobileNavbar = dynamic(() => import('./mobile-navbar.client-ZPBBZFK3.js'));
 function Navbar({
   locale,
   items,
@@ -11,15 +11,13 @@ function Navbar({
   icons,
   ...rest
 }) {
-  const localizedItems = items.map((i) => ({
-    ...i,
-    href: i.href === "/" ? `/${locale}` : `/${locale}${i.href}`
-  }));
-  const localizedCta = cta ? {
-    ...cta,
-    href: cta.href === "/" ? `/${locale}` : `/${locale}${cta.href}`
-  } : void 0;
-  const homeHref = `/${locale}`;
+  const prefixHref = (href) => {
+    if (!locale) return href;
+    return href === "/" ? `/${locale}` : `/${locale}${href}`;
+  };
+  const localizedItems = items.map((i) => ({ ...i, href: prefixHref(i.href) }));
+  const localizedCta = cta ? { ...cta, href: prefixHref(cta.href) } : void 0;
+  const homeHref = locale ? `/${locale}` : "/";
   const locales = (icons ?? []).map((i) => i.locale);
   const internalProps = {
     ...rest,

@@ -12,7 +12,7 @@ type NavItemsProps = {
   };
 };
 
-export function NavItems({ items, classNames }: NavItemsProps) {
+export default function NavItems({ items, classNames }: NavItemsProps) {
   const pathname = usePathname() ?? '/';
   const isActive = (href: string) => pathname === href;
 

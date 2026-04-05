@@ -56,8 +56,8 @@ type NavbarClassNames = {
     stickyBar?: string;
 };
 type NavbarProps = {
-    /** Current locale string, e.g. 'it' or 'en' */
-    locale: string;
+    /** Current locale string, e.g. 'it' or 'en'. Omit for non-localized apps */
+    locale?: string;
     /** Navigation items (hrefs without locale prefix) */
     items: NavbarItem[];
     /** Logo image — a Next.js static import or URL string */

@@ -7,9 +7,7 @@ import type { InternalNavbarProps, NavbarLayout } from '../types';
 
 const StickyReveal = dynamic(() => import('./sticky-reveal.client'));
 const LanguageSwitcher = dynamic(() => import('./language-switcher.client'));
-const NavItems = dynamic(() =>
-  import('./desktop-nav-items.client').then((mod) => mod.NavItems)
-);
+const NavItems = dynamic(() => import('./desktop-nav-items.client'));
 
 // ─── Layout config ────────────────────────────────────────────────────────────
 
@@ -158,7 +156,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   return (
     <nav
       className={cn(
-        `grid max-h-20 items-center px-10 py-3 ${config.gridCols}`,
+        `grid max-h-20 items-center px-10 py-3 text-white ${config.gridCols}`,
         showBackground ? 'bg-neutral-900' : 'bg-transparent',
         classNames.nav
       )}

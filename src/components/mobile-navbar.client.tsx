@@ -126,8 +126,8 @@ export default function MobileNavbar({
             <li
               key={idx}
               className={cn(
-                'mx-auto w-fit text-center uppercase transition-transform duration-300 hover:scale-110 hover:cursor-pointer',
-                isActive(item.href) ? 'border-b-2 border-neutral-100' : '',
+                'mx-auto w-fit text-center transition-transform duration-300 hover:scale-110 hover:cursor-pointer',
+                isActive(item.href) ? 'border-secondary border-b-2' : '',
                 classNames.mobileMenuItem
               )}
             >
@@ -208,27 +208,31 @@ function BaseNavbar({
   return (
     <div className='flex items-center justify-between'>
       {/* Left: language switcher */}
-      <div className='flex-1'>
-        <div className='flex items-center space-x-4'>
-          {showLanguageSwitcher && icons.length > 0 && (
-            <Suspense fallback={null}>
-              <LanguageSwitcher
-                icons={icons}
-                locales={locales}
-                classNames={{
-                  container: classNames.languageSwitcher,
-                  flagIcon: classNames.flagIcon,
-                }}
-              />
-            </Suspense>
-          )}
+      {showLanguageSwitcher && icons.length > 0 && (
+        <div className='flex-1'>
+          <div className='flex items-center space-x-4'>
+              <Suspense fallback={null}>
+                <LanguageSwitcher
+                  icons={icons}
+                  locales={locales}
+                  classNames={{
+                    container: classNames.languageSwitcher,
+                    flagIcon: classNames.flagIcon,
+                  }}
+                />
+              </Suspense>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Center: logo */}
       <Link
         href={homeHref}
-        className={cn('flex flex-1 items-center justify-center gap-2', classNames.logoWrapper)}
+        className={cn(
+          'flex items-center justify-center gap-2',
+          showLanguageSwitcher && icons.length > 0 ? 'flex-1' : '',
+          classNames.logoWrapper
+        )}
       >
         <Image
           src={logoSrc}
@@ -236,7 +240,7 @@ function BaseNavbar({
           width={56}
           height={56}
           loading='lazy'
-          className={cn('lg:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
+          className={cn('lg:size-14 size-8', classNames.logo)}
         />
         {brandName && (
           <span className={cn('text-sm font-semibold', classNames.brandName)}>

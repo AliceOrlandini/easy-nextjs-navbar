@@ -45,20 +45,16 @@ export function Navbar({
   icons,
   ...rest
 }: NavbarProps) {
-  // Prefix all hrefs with the current locale
-  const localizedItems = items.map((i) => ({
-    ...i,
-    href: i.href === '/' ? `/${locale}` : `/${locale}${i.href}`,
-  }));
+  const prefixHref = (href: string) => {
+    if (!locale) return href;
+    return href === '/' ? `/${locale}` : `/${locale}${href}`;
+  };
 
-  const localizedCta = cta
-    ? {
-        ...cta,
-        href: cta.href === '/' ? `/${locale}` : `/${locale}${cta.href}`,
-      }
-    : undefined;
+  const localizedItems = items.map((i) => ({ ...i, href: prefixHref(i.href) }));
 
-  const homeHref = `/${locale}`;
+  const localizedCta = cta ? { ...cta, href: prefixHref(cta.href) } : undefined;
+
+  const homeHref = locale ? `/${locale}` : '/';
 
   // Derive the locales list from the icons array so consumers don't need to
   // pass a separate prop — the LanguageSwitcher uses it for path manipulation.

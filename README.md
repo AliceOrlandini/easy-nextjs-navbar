@@ -95,7 +95,7 @@ export default function Header({ locale }: { locale: string }) {
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `locale` | `string` | **required** | Current locale, e.g. `'it'` or `'en'` |
+| `locale` | `string` | — | Current locale, e.g. `'it'` or `'en'`. Omit for non-localized apps |
 | `items` | `NavbarItem[]` | **required** | Navigation items — hrefs without locale prefix |
 | `logoSrc` | `string \| StaticImageData` | **required** | Logo image source |
 | `logoAlt` | `string` | **required** | Alt text for the logo |
