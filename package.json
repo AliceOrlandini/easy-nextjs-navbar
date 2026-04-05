@@ -1,6 +1,6 @@
 {
   "name": "easy-nextjs-navbar",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Reusable, localized sticky navbar for Next.js",
   "repository": {
     "type": "git",
