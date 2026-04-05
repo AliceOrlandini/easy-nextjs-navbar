@@ -11,17 +11,16 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
-    },
-    "./tailwind-preset": "./tailwind.preset.ts"
+    }
   },
   "files": [
-    "dist",
-    "tailwind.preset.ts"
+    "dist"
   ],
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "next": ">=13.0.0",

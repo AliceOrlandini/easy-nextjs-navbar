@@ -1,10 +1,7 @@
 node_modules/
 *.local
 
-# dist/ è escluso volutamente — viene committato dalla GitHub Action
-# in modo che il pacchetto sia installabile direttamente da GitHub.
-# Se pubblichi su npm, puoi aggiungere dist/ qui e lasciare che npm
-# la includa tramite il campo "files" in package.json.
+dist/
 
 .DS_Store
 **/.DS_Store

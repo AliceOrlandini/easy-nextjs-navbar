@@ -95,7 +95,7 @@ type NavbarProps = {
  *
  * @example
  * ```tsx
- * import { Navbar } from '@aliceorlandini/my-navbar';
+ * import { Navbar } from 'easy-nextjs-navbar';
  * import logo from '@/public/logo.webp';
  * import italyFlag from '@/public/flags/it.svg';
  * import ukFlag from '@/public/flags/en.svg';

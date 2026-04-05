@@ -55,7 +55,7 @@ export default function DesktopNavbar(props: InternalNavbarProps) {
   } = props;
 
   return (
-    <div className={cn('font-montserrat desktop:block hidden', classNames.container)}>
+    <div className={cn('lg:block hidden', classNames.container)}>
       {/* Navbar on top */}
       <BaseNavbar {...props} />
 
@@ -103,7 +103,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
         width={56}
         height={56}
         loading='lazy'
-        className={cn('desktop:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
+        className={cn('lg:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
       />
       {brandName && (
         <span className={cn('text-sm font-semibold', classNames.brandName)}>
@@ -140,7 +140,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   );
 
   const NavSlot = (
-    <div className={cn('desktop:flex hidden min-w-0 overflow-hidden', config.navJustify)}>
+    <div className={cn('lg:flex hidden min-w-0 overflow-hidden', config.navJustify)}>
       <NavItems items={items} classNames={{ link: classNames.link, linkActive: classNames.linkActive }} />
     </div>
   );
@@ -159,7 +159,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
     <nav
       className={cn(
         `grid max-h-20 items-center px-10 py-3 ${config.gridCols}`,
-        showBackground ? 'bg-dark-green' : 'bg-transparent',
+        showBackground ? 'bg-neutral-900' : 'bg-transparent',
         classNames.nav
       )}
     >

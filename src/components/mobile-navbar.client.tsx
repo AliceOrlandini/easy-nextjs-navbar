@@ -62,7 +62,7 @@ export default function MobileNavbar({
   const isActive = (href: string) => pathname === href;
 
   return (
-    <div className={cn('font-montserrat desktop:hidden', classNames.container)}>
+    <div className={cn('lg:hidden', classNames.container)}>
       {/* Mobile Navbar On Top */}
       <div className='relative isolate z-30 w-full px-5 py-3'>
         <BaseNavbar
@@ -89,7 +89,7 @@ export default function MobileNavbar({
       >
         <div
           className={cn(
-            'bg-dark-green h-fit max-w-screen p-5',
+            'bg-neutral-900 h-fit max-w-screen p-5',
             isStickyVisible && !isMenuOpen ? 'shadow-md' : '',
             classNames.stickyBar
           )}
@@ -113,7 +113,7 @@ export default function MobileNavbar({
       {/* Dropdown menu */}
       <nav
         className={cn(
-          'bg-dark-green text-tertiary z-20 transform px-5 pt-16 font-semibold transition-all duration-500 ease-in-out',
+          'bg-neutral-900 text-neutral-100 z-20 transform px-5 pt-16 font-semibold transition-all duration-500 ease-in-out',
           isStickyVisible ? 'fixed top-0 right-0 left-0' : 'absolute inset-x-0 top-0',
           isMenuOpen
             ? 'max-h-screen translate-y-0 opacity-100 shadow-md'
@@ -121,13 +121,13 @@ export default function MobileNavbar({
           classNames.mobileMenu
         )}
       >
-        <ul className='tablet:text-lg mx-auto my-5 w-fit space-y-5 text-base'>
+        <ul className='sm:text-lg mx-auto my-5 w-fit space-y-5 text-base'>
           {items.map((item, idx) => (
             <li
               key={idx}
               className={cn(
                 'mx-auto w-fit text-center uppercase transition-transform duration-300 hover:scale-110 hover:cursor-pointer',
-                isActive(item.href) ? 'border-b-2 border-tertiary' : '',
+                isActive(item.href) ? 'border-b-2 border-neutral-100' : '',
                 classNames.mobileMenuItem
               )}
             >
@@ -154,7 +154,7 @@ export default function MobileNavbar({
             draggable={false}
             width={1920}
             height={120}
-            className='very-small-smartphone:-bottom-12 small-smartphone:-bottom-18 large-smartphone:-bottom-24 tablet:-bottom-28 tablet-landscape:-bottom-28 pointer-events-none absolute right-0 -bottom-10 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
+            className='min-[320px]:-bottom-12 min-[375px]:-bottom-18 min-[425px]:-bottom-24 sm:-bottom-28 md:-bottom-28 pointer-events-none absolute right-0 -bottom-10 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
           />
         )}
       </nav>
@@ -236,7 +236,7 @@ function BaseNavbar({
           width={56}
           height={56}
           loading='lazy'
-          className={cn('desktop:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
+          className={cn('lg:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
         />
         {brandName && (
           <span className={cn('text-sm font-semibold', classNames.brandName)}>
@@ -246,7 +246,7 @@ function BaseNavbar({
       </Link>
 
       {/* Right: hamburger */}
-      <div className={cn('text-tertiary flex-1 flex justify-end', classNames.hamburger)}>
+      <div className={cn('text-neutral-100 flex-1 flex justify-end', classNames.hamburger)}>
         <Hamburger
           rounded
           toggled={isMenuOpen}

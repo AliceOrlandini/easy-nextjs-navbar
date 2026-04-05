@@ -17,14 +17,14 @@ export function NavItems({ items, classNames }: NavItemsProps) {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <ul className='m-0 flex min-w-0 list-none flex-nowrap items-center gap-x-6 p-0 text-shadow-md'>
+    <ul className='m-0 flex min-w-0 list-none flex-nowrap items-center gap-x-6 p-0'>
       {items.map((item, idx) => (
         <li
           key={idx}
           className={cn(
             'my-auto min-w-0',
             isActive(item.href)
-              ? cn('border-b-2 border-tertiary', classNames?.linkActive)
+              ? cn('border-b-2 border-neutral-100', classNames?.linkActive)
               : ''
           )}
         >
