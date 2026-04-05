@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { jsxs, Fragment, jsx } from 'react/jsx-runtime';
 
 var DesktopNavbar = dynamic(() => import('./desktop-navbar-FLCXLWZL.js'));
-var MobileNavbar = dynamic(() => import('./mobile-navbar.client-ZPBBZFK3.js'));
+var MobileNavbar = dynamic(() => import('./mobile-navbar.client-HP56THYL.js'));
 function Navbar({
   locale,
   items,

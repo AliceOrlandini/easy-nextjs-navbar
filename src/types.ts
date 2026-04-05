@@ -37,6 +37,8 @@ export type NavbarClassNames = {
   logoWrapper?: string;
   /** Brand name <span> rendered next to the logo */
   brandName?: string;
+  /** Brand name <span> modifier applied when the mobile menu is open */
+  brandNameOpen?: string;
   /** Each nav item <a> link */
   link?: string;
   /** Modifier applied to the active nav item <li> */
@@ -49,10 +51,14 @@ export type NavbarClassNames = {
   flagIcon?: string;
   /** Mobile hamburger button wrapper */
   hamburger?: string;
+  /** Mobile hamburger button wrapper modifier applied when the mobile menu is open */
+  hamburgerOpen?: string;
   /** Mobile dropdown menu panel */
   mobileMenu?: string;
   /** Each mobile menu <li> item */
   mobileMenuItem?: string;
+  /** Modifier applied to the active mobile menu <li> */
+  mobileMenuItemActive?: string;
   /** Dark semi-transparent overlay behind mobile menu */
   mobileOverlay?: string;
   /** Fixed sticky bar wrapper */

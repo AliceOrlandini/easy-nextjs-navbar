@@ -127,7 +127,9 @@ export default function MobileNavbar({
               key={idx}
               className={cn(
                 'mx-auto w-fit text-center transition-transform duration-300 hover:scale-110 hover:cursor-pointer',
-                isActive(item.href) ? 'border-secondary border-b-2' : '',
+                isActive(item.href)
+                  ? cn('border-secondary border-b-2', classNames.mobileMenuItemActive)
+                  : '',
                 classNames.mobileMenuItem
               )}
             >
@@ -243,14 +245,26 @@ function BaseNavbar({
           className={cn('lg:size-14 size-8', classNames.logo)}
         />
         {brandName && (
-          <span className={cn('text-sm font-semibold', classNames.brandName)}>
+          <span
+            className={cn(
+              'text-sm font-semibold transition-colors duration-300',
+              classNames.brandName,
+              isMenuOpen ? classNames.brandNameOpen : ''
+            )}
+          >
             {brandName}
           </span>
         )}
       </Link>
 
       {/* Right: hamburger */}
-      <div className={cn('text-neutral-100 flex-1 flex justify-end', classNames.hamburger)}>
+      <div
+        className={cn(
+          'text-neutral-100 flex-1 flex justify-end transition-colors duration-300',
+          classNames.hamburger,
+          isMenuOpen ? classNames.hamburgerOpen : ''
+        )}
+      >
         <Hamburger
           rounded
           toggled={isMenuOpen}

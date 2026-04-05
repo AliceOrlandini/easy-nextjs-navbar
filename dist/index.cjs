@@ -9,7 +9,7 @@ function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
 var dynamic__default = /*#__PURE__*/_interopDefault(dynamic);
 
 var DesktopNavbar = dynamic__default.default(() => import('./desktop-navbar-75YFQUNY.cjs'));
-var MobileNavbar = dynamic__default.default(() => import('./mobile-navbar.client-TNC32P24.cjs'));
+var MobileNavbar = dynamic__default.default(() => import('./mobile-navbar.client-K6JN7SCO.cjs'));
 function Navbar({
   locale,
   items,

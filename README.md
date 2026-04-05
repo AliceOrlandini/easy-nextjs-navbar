@@ -173,6 +173,9 @@ Every internal element can be styled by passing Tailwind classes to the `classNa
 | `mobileMenuItem` | Each mobile menu `<li>` |
 | `mobileOverlay` | Semi-transparent backdrop |
 | `stickyBar` | Fixed sticky bar wrapper |
+| `mobileMenuItemActive` | Modifier on the active mobile menu `<li>` |
+| `brandNameOpen` | Modifier on the brand name `<span>` when the mobile menu is open |
+| `hamburgerOpen` | Modifier on the hamburger wrapper when the mobile menu is open |
 
 ## `useScrollThreshold`
 
