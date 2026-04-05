@@ -227,7 +227,7 @@ function BaseNavbar({
         </div>
       )}
 
-      {/* Center: logo */}
+      {/* Logo (center or right) */}
       <Link
         href={homeHref}
         className={cn(
@@ -260,7 +260,7 @@ function BaseNavbar({
       {/* Right: hamburger */}
       <div
         className={cn(
-          'text-neutral-100 flex-1 flex justify-end transition-colors duration-300',
+          'text-neutral-100 flex justify-end transition-colors duration-300',
           classNames.hamburger,
           isMenuOpen ? classNames.hamburgerOpen : ''
         )}

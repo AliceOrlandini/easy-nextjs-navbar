@@ -17,7 +17,7 @@ export default function NavItems({ items, classNames }: NavItemsProps) {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <ul className='m-0 flex min-w-0 list-none flex-nowrap items-center gap-x-6 p-0'>
+    <ul className='m-0 flex min-w-0 list-none flex-nowrap items-center gap-x-6 p-0 text-neutral-500'>
       {items.map((item, idx) => (
         <li
           key={idx}

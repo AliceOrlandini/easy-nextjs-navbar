@@ -3,7 +3,7 @@ import { useScrollThreshold } from '../hooks/use-scroll-threshold';
 import { cn } from '../lib/cn';
 
 export default function StickyReveal({
-  threshold = '100vh',
+  threshold = '100vh', 
   className,
   children,
 }: {
