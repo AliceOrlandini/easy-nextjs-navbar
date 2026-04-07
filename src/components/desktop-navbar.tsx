@@ -28,13 +28,13 @@ const LAYOUT_CONFIG: Record<NavbarLayout, LayoutConfig> = {
     actionsJustify: 'justify-start',
   },
   'logo-left': {
-    gridCols: 'grid-cols-[auto_1fr_auto]',
+    gridCols: 'grid-cols-[1fr_auto_1fr]',
     slots: ['logo', 'nav', 'actions'],
-    navJustify: 'justify-center',
+    navJustify: 'justify-end',
     actionsJustify: 'justify-end',
   },
   'logo-right': {
-    gridCols: 'grid-cols-[auto_1fr_auto]',
+    gridCols: 'grid-cols-[1fr_auto_1fr]',
     slots: ['actions', 'nav', 'logo'],
     navJustify: 'justify-center',
     actionsJustify: 'justify-start',
@@ -83,6 +83,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
     showLanguageSwitcher = true,
     layout = 'logo-center',
     classNames = {},
+    activeMatchMode = 'exact',
     showBackground,
   } = props;
 
@@ -101,7 +102,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
         width={56}
         height={56}
         loading='lazy'
-        className={cn('lg:size-14 size-8 rounded-full shadow-xl', classNames.logo)}
+        className={cn('size-8', classNames.logo)}
       />
       {brandName && (
         <span className={cn('text-sm font-semibold', classNames.brandName, showBackground && classNames.brandNameSticky)}>
@@ -138,8 +139,8 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   );
 
   const NavSlot = (
-    <div className={cn('lg:flex hidden min-w-0 overflow-hidden', config.navJustify)}>
-      <NavItems items={items} classNames={{ link: classNames.link, linkActive: classNames.linkActive }} />
+    <div className={cn('flex min-w-0 overflow-hidden', config.navJustify)}>
+      <NavItems items={items} isSticky={showBackground} activeMatchMode={activeMatchMode} classNames={{ link: classNames.link, linkSticky: classNames.linkSticky, linkActive: classNames.linkActive }} />
     </div>
   );
 
@@ -158,7 +159,8 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
       className={cn(
         `grid max-h-20 items-center px-10 py-3 text-white ${config.gridCols}`,
         showBackground ? 'bg-neutral-900' : 'bg-transparent',
-        classNames.nav
+        classNames.nav,
+        showBackground && classNames.stickyBar
       )}
     >
       <div className='z-50 flex min-w-0 items-center gap-4'>

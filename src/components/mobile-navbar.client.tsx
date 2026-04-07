@@ -25,6 +25,7 @@ export default function MobileNavbar({
   decorativeBorderSrc,
   hamburgerLabel = 'Open/close menu',
   mobileStickyThreshold = 500,
+  activeMatchMode = 'exact',
   classNames = {},
 }: InternalNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,7 +60,10 @@ export default function MobileNavbar({
     }
   }, [isMenuOpen]);
 
-  const isActive = (href: string) => pathname === href;
+  const isActive = (href: string) =>
+    activeMatchMode === 'startsWith' && href !== '/'
+      ? pathname.startsWith(href)
+      : pathname === href;
 
   return (
     <div className={cn('lg:hidden', classNames.container)}>
@@ -96,6 +100,7 @@ export default function MobileNavbar({
         >
           <BaseNavbar
             isMenuOpen={isMenuOpen}
+            isSticky
             setIsMenuOpen={setIsMenuOpen}
             homeHref={homeHref}
             logoSrc={logoSrc}
@@ -113,7 +118,7 @@ export default function MobileNavbar({
       {/* Dropdown menu */}
       <nav
         className={cn(
-          'bg-neutral-900 text-neutral-100 z-20 transform px-5 pt-16 font-semibold transition-all duration-500 ease-in-out',
+          'bg-neutral-900 text-neutral-100 z-20 transform px-5 pt-16 transition-all duration-500 ease-in-out',
           isStickyVisible ? 'fixed top-0 right-0 left-0' : 'absolute inset-x-0 top-0',
           isMenuOpen
             ? 'max-h-screen translate-y-0 opacity-100 shadow-md'
@@ -121,7 +126,7 @@ export default function MobileNavbar({
           classNames.mobileMenu
         )}
       >
-        <ul className='sm:text-lg mx-auto my-5 w-fit space-y-5 text-base'>
+        <ul className='flex w-full flex-col items-center my-5 space-y-5'>
           {items.map((item, idx) => (
             <li
               key={idx}
@@ -182,6 +187,7 @@ export default function MobileNavbar({
 
 type BaseNavbarProps = {
   isMenuOpen: boolean;
+  isSticky?: boolean;
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
   homeHref: string;
   logoSrc: InternalNavbarProps['logoSrc'];
@@ -196,6 +202,7 @@ type BaseNavbarProps = {
 
 function BaseNavbar({
   isMenuOpen,
+  isSticky,
   setIsMenuOpen,
   homeHref,
   logoSrc,
@@ -209,29 +216,12 @@ function BaseNavbar({
 }: BaseNavbarProps) {
   return (
     <div className='flex items-center justify-between'>
-      {/* Left: language switcher */}
-      {showLanguageSwitcher && icons.length > 0 && (
-        <div className='flex-1'>
-          <div className='flex items-center space-x-4'>
-              <Suspense fallback={null}>
-                <LanguageSwitcher
-                  icons={icons}
-                  locales={locales}
-                  classNames={{
-                    container: classNames.languageSwitcher,
-                    flagIcon: classNames.flagIcon,
-                  }}
-                />
-              </Suspense>
-          </div>
-        </div>
-      )}
 
-      {/* Logo (center or right) */}
+      {/* Logo (center or left) */}
       <Link
         href={homeHref}
         className={cn(
-          'flex items-center justify-center gap-2',
+          'flex items-center justify-left gap-2',
           showLanguageSwitcher && icons.length > 0 ? 'flex-1' : '',
           classNames.logoWrapper
         )}
@@ -249,6 +239,7 @@ function BaseNavbar({
             className={cn(
               'text-sm font-semibold transition-colors duration-300',
               classNames.brandName,
+              isSticky && classNames.brandNameSticky,
               isMenuOpen ? classNames.brandNameOpen : ''
             )}
           >
@@ -257,11 +248,30 @@ function BaseNavbar({
         )}
       </Link>
 
+      {/* Right: language switcher */}
+      {showLanguageSwitcher && icons.length > 0 && (
+        <div className=''>
+          <div className='flex items-center space-x-4'>
+              <Suspense fallback={null}>
+                <LanguageSwitcher
+                  icons={icons}
+                  locales={locales}
+                  classNames={{
+                    container: classNames.languageSwitcher,
+                    flagIcon: classNames.flagIcon,
+                  }}
+                />
+              </Suspense>
+          </div>
+        </div>
+      )}
+
       {/* Right: hamburger */}
       <div
         className={cn(
           'text-neutral-100 flex justify-end transition-colors duration-300',
           classNames.hamburger,
+          isSticky && classNames.hamburgerSticky,
           isMenuOpen ? classNames.hamburgerOpen : ''
         )}
       >

@@ -43,6 +43,8 @@ export type NavbarClassNames = {
   brandNameOpen?: string;
   /** Each nav item <a> link */
   link?: string;
+  /** Each nav item <a> link modifier applied when the sticky navbar is shown */
+  linkSticky?: string;
   /** Modifier applied to the active nav item <li> */
   linkActive?: string;
   /** CTA <a> link */
@@ -55,6 +57,8 @@ export type NavbarClassNames = {
   hamburger?: string;
   /** Mobile hamburger button wrapper modifier applied when the mobile menu is open */
   hamburgerOpen?: string;
+  /** Mobile hamburger button wrapper modifier applied when the sticky navbar is shown */
+  hamburgerSticky?: string;
   /** Mobile dropdown menu panel */
   mobileMenu?: string;
   /** Each mobile menu <li> item */
@@ -96,6 +100,12 @@ export type NavbarProps = {
   stickyThreshold?: string | number;
   /** Scroll threshold (px) to trigger the mobile sticky bar. Default: 500 */
   mobileStickyThreshold?: string | number;
+  /**
+   * How to determine if a nav link is active.
+   * - 'exact': pathname must match the href exactly (default)
+   * - 'startsWith': pathname only needs to start with the href (useful for nested routes)
+   */
+  activeMatchMode?: 'exact' | 'startsWith';
 };
 
 // ─── Internal prop shapes (passed from Navbar orchestrator to sub-components) ──

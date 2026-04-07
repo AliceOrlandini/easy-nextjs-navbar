@@ -2,6 +2,7 @@
   "name": "easy-nextjs-navbar",
   "version": "0.1.6",
   "description": "Reusable, localized sticky navbar for Next.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/AliceOrlandini/easy-nextjs-navbar"

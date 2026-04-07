@@ -1,17 +1,20 @@
 # easy-nextjs-navbar
 
-A reusable, localized sticky navbar for Next.js with built-in mobile support, language switching, and Tailwind CSS customization.
+> [!WARNING]  
+> This library is in early beta. I'm actively developing it so expect breaking changes until the 1.0.0 release. Feedback and contributions are very welcome!
+
+A sticky, localized navbar built specifically for **Next.js App Router** best practices: the desktop navbar is a Server Component by default, and client-side JavaScript is added only where strictly necessary (scroll detection, active route, language switching, mobile drawer).
 
 ## Features
 
-- Server Component by default — only the interactive parts are Client Components
-- Automatic locale prefixing for all hrefs (pass `/about`, get `/it/about`)
+- Desktop navbar is a **Server Component** — zero JS overhead for static content
+- Client Components used only where required: scroll threshold, active link, language switcher, mobile drawer
+- Automatic locale prefixing — pass `/about`, render `/en/about`
 - Sticky reveal on desktop — slides in after scrolling past a configurable threshold
 - Mobile drawer with animated hamburger, overlay, and keyboard accessibility
 - Built-in language switcher with flag icons and cookie persistence
-- Three logo layouts: `logo-left`, `logo-center`, `logo-right`
+- Three logo layouts: `logo-left`, `logo-center`, `logo-right` (This is a beta feature! Logo left is tested, but the others are new and may have some rough edges. I'm working on improving it. Feedback welcome.)
 - Full Tailwind class override for every internal element via `classNames`
-- Colors overridable via CSS custom properties without touching the preset
 
 ## Installation
 
@@ -23,6 +26,35 @@ pnpm add easy-nextjs-navbar
 
 ```bash
 pnpm add next react react-dom tailwindcss
+```
+
+## Tailwind setup
+
+The library ships pre-compiled classes inside `dist/`. You must tell Tailwind where to find them, otherwise the classes will be purged from your build.
+
+### Tailwind v4
+
+Add a `@source` directive in your `globals.css`:
+
+```css
+@source "../node_modules/easy-nextjs-navbar/dist";
+```
+
+> Adjust the relative path if your `globals.css` is nested deeper (e.g. `src/app/globals.css` → `../../node_modules/easy-nextjs-navbar/dist`).
+
+### Tailwind v3
+
+Add the library's dist folder to the `content` array in `tailwind.config.js`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{ts,tsx}',
+    './node_modules/easy-nextjs-navbar/dist/**/*.{js,cjs}',
+  ],
+  // ...
+};
 ```
 
 ## Quick start
@@ -47,7 +79,7 @@ export default function Header({ locale }: { locale: string }) {
 }
 ```
 
-> `Navbar` is a Server Component. Use it directly in a Next.js layout or page — no `'use client'` needed.
+> `Navbar` is a Server Component. Drop it directly in a Next.js layout or page — no `'use client'` needed.
 
 ## Full example
 
@@ -77,6 +109,7 @@ export default function Header({ locale }: { locale: string }) {
       ]}
       cta={{ title: 'Write to us', href: '/contact', icon: <Send size={16} /> }}
       layout="logo-center"
+      activeMatchMode="startsWith"
       stickyThreshold="100vh"
       mobileStickyThreshold={500}
       decorativeBorderSrc={decorativeBorder}
@@ -104,11 +137,12 @@ export default function Header({ locale }: { locale: string }) {
 | `cta` | `NavbarCta` | — | Call-to-action button config. Omit to hide it |
 | `showLanguageSwitcher` | `boolean` | `true` | Show/hide the language switcher when icons are provided |
 | `layout` | `NavbarLayout` | `'logo-center'` | Logo position — see [Layouts](#layouts) |
-| `classNames` | `NavbarClassNames` | `{}` | Tailwind class overrides for internal elements |
+| `activeMatchMode` | `'exact' \| 'startsWith'` | `'exact'` | How to detect the active link, this could be useful for custom css for the active link. Use `'startsWith'` for nested routes, otherwise `'exact'` |
+| `classNames` | `NavbarClassNames` | `{}` | Tailwind class overrides for internal elements — see [Customization](#customization) |
 | `decorativeBorderSrc` | `string \| StaticImageData` | — | Decorative image at the bottom of the mobile drawer |
 | `hamburgerLabel` | `string` | `'Open/close menu'` | Accessible label for the mobile hamburger button |
-| `stickyThreshold` | `string \| number` | `'100vh'` | Scroll threshold to show the desktop sticky bar. Accepts px or `vh` strings |
-| `mobileStickyThreshold` | `string \| number` | `500` | Scroll threshold (px) to show the mobile sticky bar |
+| `stickyThreshold` | `string \| number` | `'100vh'` | Scroll threshold to show the desktop sticky bar. Accepts px numbers or `vh` strings |
+| `mobileStickyThreshold` | `string \| number` | `500` | Scroll threshold to show the mobile sticky bar (px) |
 
 ### NavbarItem
 
@@ -152,30 +186,71 @@ The `layout` prop controls where the logo appears in the desktop navbar:
 
 ## Customization
 
-### Class overrides
+Every internal element can be styled by passing Tailwind classes to the `classNames` prop. Classes are merged with the defaults using `tailwind-merge`, so your overrides always win.
 
-Every internal element can be styled by passing Tailwind classes to the `classNames` prop. Classes are merged with the defaults using `tailwind-merge`, so your classes always win.
+### `classNames` reference
 
-| Key | Target element |
-|---|---|
-| `container` | Outermost wrapper `<div>` |
-| `nav` | The `<nav>` element |
-| `logoWrapper` | `<Link>` wrapping the logo and brand name |
-| `logo` | Logo `<Image>` |
-| `brandName` | Brand name `<span>` |
-| `link` | Each desktop nav item `<a>` |
-| `linkActive` | Modifier on the active nav item |
-| `cta` | CTA `<a>` link |
-| `languageSwitcher` | Language switcher container |
-| `flagIcon` | Each flag `<Image>` |
-| `hamburger` | Mobile hamburger button wrapper |
-| `mobileMenu` | Mobile dropdown panel |
-| `mobileMenuItem` | Each mobile menu `<li>` |
-| `mobileOverlay` | Semi-transparent backdrop |
-| `stickyBar` | Fixed sticky bar wrapper |
-| `mobileMenuItemActive` | Modifier on the active mobile menu `<li>` |
-| `brandNameOpen` | Modifier on the brand name `<span>` when the mobile menu is open |
-| `hamburgerOpen` | Modifier on the hamburger wrapper when the mobile menu is open |
+| Key | Element | When applied |
+|---|---|---|
+| `container` | Outermost wrapper `<div>` | Always |
+| `nav` | The `<nav>` element | Always |
+| `logoWrapper` | `<Link>` wrapping the logo and brand name | Always |
+| `logo` | Logo `<Image>` | Always |
+| `brandName` | Brand name `<span>` next to the logo | Always |
+| `brandNameSticky` | Brand name `<span>` modifier | Only when the sticky bar is visible |
+| `brandNameOpen` | Brand name `<span>` modifier | Only when the mobile menu is open |
+| `link` | Each desktop nav item `<a>` | Always |
+| `linkSticky` | Desktop nav item `<a>` modifier | Only when the sticky bar is visible |
+| `linkActive` | Desktop nav item `<a>` modifier | Only on the currently active route |
+| `cta` | CTA `<a>` link | Always |
+| `languageSwitcher` | Language switcher container `<div>` | Always |
+| `flagIcon` | Each flag `<Image>` | Always |
+| `hamburger` | Mobile hamburger button wrapper | Always |
+| `hamburgerSticky` | Hamburger wrapper modifier | Only when the mobile sticky bar is visible |
+| `hamburgerOpen` | Hamburger wrapper modifier | Only when the mobile menu is open |
+| `mobileMenu` | Mobile dropdown panel | Always |
+| `mobileMenuItem` | Each mobile menu `<li>` | Always |
+| `mobileMenuItemActive` | Mobile menu `<li>` modifier | Only on the currently active route |
+| `mobileOverlay` | Semi-transparent backdrop behind the mobile menu | Always |
+| `stickyBar` | Fixed sticky bar wrapper | Always |
+
+### Example: dark sticky bar
+
+```tsx
+classNames={{
+  stickyBar: 'bg-neutral-900/95 backdrop-blur',
+  link: 'text-neutral-300',
+  linkSticky: 'text-white',
+  linkActive: 'text-white border-b border-white',
+  cta: 'bg-white text-neutral-900 hover:bg-neutral-100',
+}}
+```
+
+## Built-in flag icons
+
+The library ships Italian and UK flag icons ready to use as the `icons` prop.
+
+```tsx
+import { Navbar, DEFAULT_ICONS } from 'easy-nextjs-navbar';
+
+<Navbar
+  icons={DEFAULT_ICONS}
+  // ...
+/>
+```
+
+`DEFAULT_ICONS` is an array of two `NavbarIcon` entries (`locale: 'it'` and `locale: 'en'`). You can also import the individual flags and build your own array:
+
+```tsx
+import { FLAG_IT, FLAG_EN } from 'easy-nextjs-navbar';
+
+const icons: NavbarIcon[] = [
+  { src: FLAG_IT, locale: 'it', alt: 'Italiano' },
+  { src: FLAG_EN, locale: 'en', alt: 'English' },
+];
+```
+
+Replace any entry with your own `StaticImageData` import or image URL to use custom flags.
 
 ## `useScrollThreshold`
 

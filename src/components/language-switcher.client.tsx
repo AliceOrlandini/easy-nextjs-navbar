@@ -58,7 +58,7 @@ export default function LanguageSwitcher({
               alt={icon.alt}
               width={24}
               height={24}
-              className={cn('size-6', classNames?.flagIcon)}
+              className={cn('lg:size-6 size-5 hover:scale-110 transition-transform duration-300', classNames?.flagIcon)}
             />
           </Link>
         );
