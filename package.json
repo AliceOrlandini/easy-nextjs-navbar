@@ -1,6 +1,6 @@
 {
   "name": "easy-nextjs-navbar",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Reusable, localized sticky navbar for Next.js",
   "author": "Alice Orlandini <info@aliceorlandini.it> (https://aliceorlandini.it)",
   "keywords": [
