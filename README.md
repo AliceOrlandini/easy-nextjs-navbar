@@ -47,13 +47,13 @@ The library ships pre-compiled classes inside `dist/`. You must tell Tailwind wh
 
 ### Tailwind v4
 
-Add a `@source` directive in your `globals.css`:
+Add a `@source` directive in your `global.css` or `globals.css`:
 
 ```css
 @source "../node_modules/easy-nextjs-navbar/dist";
 ```
 
-> Adjust the relative path if your `globals.css` is nested deeper (e.g. `src/app/globals.css` → `../../node_modules/easy-nextjs-navbar/dist`).
+> Adjust the relative path if your file is nested deeper, for example `src/app/global.css`, `src/app/globals.css`, `src/styles/global.css`, or `src/styles/globals.css`.
 
 ### Tailwind v3
 

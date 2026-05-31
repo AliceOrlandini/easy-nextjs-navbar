@@ -156,15 +156,17 @@ function toPosixPath(pathValue: string) {
 }
 
 async function setupTailwindV4(cwd: string) {
-  const globalsCss = await findFileByName(cwd, ['globals.css'], [
+  const globalsCss = await findFileByName(cwd, ['globals.css', 'global.css'], [
     join(cwd, 'src', 'app', 'globals.css'),
     join(cwd, 'app', 'globals.css'),
     join(cwd, 'src', 'styles', 'globals.css'),
     join(cwd, 'styles', 'globals.css'),
+    join(cwd, 'src', 'app', 'global.css'),
+    join(cwd, 'app', 'global.css'),
   ]);
 
   if (!globalsCss) {
-    throw new Error('Impossibile trovare globals.css. Cerca app/globals.css o src/app/globals.css.');
+    throw new Error('Unable to find global.css or globals.css. Look for app/global.css, app/globals.css, src/app/global.css, or src/app/globals.css.');
   }
 
   const current = await readFile(globalsCss, 'utf8');
@@ -193,7 +195,7 @@ async function setupTailwindV3(cwd: string) {
   ]);
 
   if (!tailwindConfig) {
-    throw new Error('Impossibile trovare tailwind.config.*. Crea prima il file di configurazione di Tailwind v3.');
+    throw new Error('Unable to find tailwind.config.*. Create the Tailwind v3 configuration file first.');
   }
 
   const current = await readFile(tailwindConfig, 'utf8');
@@ -203,7 +205,7 @@ async function setupTailwindV3(cwd: string) {
 
   if (updated === null) {
     throw new Error(
-      `Ho trovato ${tailwindConfig}, ma non sono riuscito a inserire il dist della libreria nel content array. Aggancialo manualmente.`
+      `Found ${tailwindConfig}, but could not insert the library dist folder into the content array. Add it manually.`
     );
   }
 
@@ -246,16 +248,16 @@ async function main() {
 
   if (!tailwindMajor) {
     throw new Error(
-      'Non riesco a rilevare Tailwind CSS. Assicurati che tailwindcss sia installato nel progetto prima di eseguire init.'
+      'Unable to detect Tailwind CSS. Make sure tailwindcss is installed in the project before running init.'
     );
   }
 
   const result = tailwindMajor === 4 ? await setupTailwindV4(cwd) : await setupTailwindV3(cwd);
 
   if (result.changed) {
-    console.log(`Aggiornato ${result.filePath} per Tailwind v${result.version}.`);
+    console.log(`Updated ${result.filePath} for Tailwind v${result.version}.`);
   } else {
-    console.log(`Nessuna modifica necessaria: ${result.filePath} era già configurato per Tailwind v${result.version}.`);
+    console.log(`No changes needed: ${result.filePath} was already configured for Tailwind v${result.version}.`);
   }
 }
 
