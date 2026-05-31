@@ -22,6 +22,19 @@ A sticky, localized navbar built specifically for **Next.js App Router** best pr
 pnpm add easy-nextjs-navbar
 ```
 
+### Automatic init
+
+You can let the library patch the local Tailwind setup for you:
+
+```bash
+npx easy-nextjs-navbar init
+```
+
+The command detects Tailwind v3 or v4 and updates the common Next.js setup files automatically:
+
+- Tailwind v4: adds the needed `@source` directive to `globals.css`
+- Tailwind v3: adds the package dist folder to `tailwind.config.*`
+
 **Peer dependencies** (install separately if not already in your project):
 
 ```bash

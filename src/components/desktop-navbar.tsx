@@ -173,6 +173,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   return (
     <div>
       <nav
+        aria-label={showBackground ? 'Sticky primary navigation' : 'Primary navigation'}
         className={cn(
           `grid max-h-20 items-center px-10 py-3 ${config.gridCols}`,
           classNames.nav,

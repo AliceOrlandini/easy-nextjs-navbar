@@ -35,6 +35,9 @@
       "require": "./dist/index.cjs"
     }
   },
+  "bin": {
+    "easy-nextjs-navbar": "./dist/cli.cjs"
+  },
   "files": [
     "dist"
   ],

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import DesktopNavbar from "./desktop-navbar";
-import { DECORATIVE_SRC, sampleInternalProps } from "../stories/fixtures/sample-props";
+import { sampleInternalProps, DECORATIVE_SRC } from "../stories/fixtures/sample-props";
 
 const meta: Meta<typeof DesktopNavbar> = {
   title: "Internal/DesktopNavbar",
@@ -20,7 +20,52 @@ const meta: Meta<typeof DesktopNavbar> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvasElement }) => {
+    const window = canvasElement.ownerDocument.defaultView;
+    if (!window) throw new Error('Expected a browser window in the Storybook canvas');
+
+    const mustExist = (selector: string) => {
+      const element = canvasElement.querySelector(selector);
+      if (!element) throw new Error(`Expected to find ${selector}`);
+    };
+
+    const mustHaveHref = (expectedPath: string) => {
+      const anchors = Array.from(canvasElement.querySelectorAll('a'));
+      const hasMatch = anchors.some((anchor) => {
+        const rawHref = anchor.getAttribute('href') ?? '';
+        const resolvedPath = new URL(anchor.href, window.location.origin).pathname;
+        const normalize = (value: string) => value.replace(/\/+$/, '') || '/';
+        return normalize(rawHref) === normalize(expectedPath) || normalize(resolvedPath) === normalize(expectedPath);
+      });
+
+      if (!hasMatch) {
+        throw new Error(`Expected to find a link to ${expectedPath}`);
+      }
+    };
+
+    const waitForHref = async (expectedPath: string, timeoutMs = 2000) => {
+      const start = Date.now();
+      while (true) {
+        try {
+          mustHaveHref(expectedPath);
+          return;
+        } catch {
+          if (Date.now() - start > timeoutMs) {
+            throw new Error(`Expected to find a link to ${expectedPath}`);
+          }
+          await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()));
+        }
+      }
+    };
+
+    await waitForHref('/en/about');
+    await waitForHref('/en/contact');
+    // mustExist('a[aria-label="About us"]');
+    await waitForHref('/it');
+    await waitForHref('/en');
+  },
+};
 
 // Layout variants
 export const LogoCenter: Story = { name: 'Layout / Logo Center', args: { layout: 'logo-center' } };

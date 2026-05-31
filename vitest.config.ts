@@ -31,6 +31,12 @@ export default defineConfig({
           },
         },
       },
+      {
+        test: {
+          name: 'unit',
+          include: ['src/**/*.test.ts'],
+        },
+      },
     ],
   },
 });
