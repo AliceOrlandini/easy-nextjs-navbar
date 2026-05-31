@@ -16,13 +16,12 @@ const preview: Preview = {
       options: {
         dark: { name: "Dark", value: "#171717" }, // neutral-900
         light: { name: "Light", value: "#ffffff" },
-        // hero: { name: "Hero", value: "#1e293b" }, // slate-800
       },
     },
     nextjs: {
       appDirectory: true,
       navigation: {
-        pathname: "/it/about",
+        pathname: "/it",
       },
     },
   },

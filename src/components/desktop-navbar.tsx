@@ -36,9 +36,9 @@ const LAYOUT_CONFIG: Record<NavbarLayout, LayoutConfig> = {
   'logo-right': {
     gridCols: 'grid-cols-[1fr_auto_1fr]',
     slots: ['actions', 'nav', 'logo'],
-    navJustify: 'justify-center',
+    navJustify: 'justify-end',
     actionsJustify: 'justify-start',
-  },
+  }
 };
 
 // ─── Desktop Navbar (Server Component) ───────────────────────────────────────
@@ -85,6 +85,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
     classNames = {},
     activeMatchMode = 'exact',
     showBackground,
+    ctaPlacement = 'actions',
   } = props;
 
   const config = LAYOUT_CONFIG[layout];
@@ -105,7 +106,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
         className={cn('size-8', classNames.logo)}
       />
       {brandName && (
-        <span className={cn('text-sm font-semibold', classNames.brandName, showBackground && classNames.brandNameSticky)}>
+        <span className={cn('text-sm text-neutral-500', classNames.brandName, showBackground && classNames.brandNameSticky)}>
           {brandName}
         </span>
       )}
@@ -123,11 +124,11 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
           />
         </Suspense>
       )}
-      {cta && (
+      {cta && ctaPlacement === 'actions' && (
         <Link
           href={cta.href}
           className={cn(
-            'inline-flex items-center gap-2 border border-white/30 px-4 py-2 text-sm font-medium transition-colors hover:bg-white/10',
+            'inline-flex items-center gap-2 px-4 py-2 text-sm transition-colors border border-slate-200',
             classNames.cta
           )}
         >
@@ -139,8 +140,22 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   );
 
   const NavSlot = (
-    <div className={cn('flex min-w-0 overflow-hidden', config.navJustify)}>
+    <div className={cn('flex min-w-0 items-center overflow-hidden', config.navJustify)}>
       <NavItems items={items} isSticky={showBackground} activeMatchMode={activeMatchMode} classNames={{ link: classNames.link, linkSticky: classNames.linkSticky, linkActive: classNames.linkActive }} />
+      {cta && ctaPlacement === 'nav' && (
+        <div className='ml-4'>
+          <Link
+            href={cta.href}
+            className={cn(
+              'inline-flex items-center text-neutral-500 gap-2 px-3 py-1 text-sm transition-colors border border-neutral-200',
+              classNames.cta
+            )}
+          >
+            {cta.title}
+            {cta.icon}
+          </Link>
+        </div>
+      )}
     </div>
   );
 
@@ -157,8 +172,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   return (
     <nav
       className={cn(
-        `grid max-h-20 items-center px-10 py-3 text-white ${config.gridCols}`,
-        showBackground ? 'bg-neutral-900' : 'bg-transparent',
+        `grid max-h-20 items-center px-10 py-3 ${config.gridCols}`,
         classNames.nav,
         showBackground && classNames.stickyBar
       )}

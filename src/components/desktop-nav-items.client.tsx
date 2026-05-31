@@ -38,11 +38,11 @@ export default function NavItems({ items, isSticky, activeMatchMode = 'exact', c
             aria-label={item.ariaLabel}
             href={item.href}
             className={cn(
-              'wrap-break-words inline-flex max-w-[18ch] min-w-0 items-center text-center text-sm font-medium leading-tight whitespace-normal',
+              'wrap-break-words inline-flex max-w-[18ch] min-w-0 items-center text-center text-sm leading-tight whitespace-normal',
               isActive(item.href) ? 'pointer-events-none' : '',
               classNames?.link,
               isSticky && classNames?.linkSticky
-)}
+          )}
           >
             {item.title}
           </Link>

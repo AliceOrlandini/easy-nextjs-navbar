@@ -102,6 +102,14 @@ type NavbarProps = {
      * - 'startsWith': pathname only needs to start with the href (useful for nested routes)
      */
     activeMatchMode?: 'exact' | 'startsWith';
+    /**
+     * Where to render the CTA by default in the desktop navbar.
+     * - 'actions' (default): next to the language switcher
+     * - 'nav': inside the nav area, after the nav items
+     */
+    ctaPlacement?: 'actions' | 'nav';
+    /** Whether to render the CTA inside the mobile drawer menu. Default: true */
+    showCtaInMobile?: boolean;
 };
 
 /**

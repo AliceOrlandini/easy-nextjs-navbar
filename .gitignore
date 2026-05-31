@@ -10,3 +10,5 @@ storybook-static
 
 .next/
 .claude/
+
+.debug-storybook.log

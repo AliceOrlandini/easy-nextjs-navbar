@@ -22,6 +22,7 @@ export default function MobileNavbar({
   logoAlt,
   brandName,
   showLanguageSwitcher = true,
+  showCtaInMobile = true,
   decorativeBorderSrc,
   hamburgerLabel = 'Open/close menu',
   mobileStickyThreshold = 500,
@@ -93,7 +94,7 @@ export default function MobileNavbar({
       >
         <div
           className={cn(
-            'bg-neutral-900 h-fit max-w-screen p-5',
+            'h-fit max-w-screen p-5',
             isStickyVisible && !isMenuOpen ? 'shadow-md' : '',
             classNames.stickyBar
           )}
@@ -118,7 +119,7 @@ export default function MobileNavbar({
       {/* Dropdown menu */}
       <nav
         className={cn(
-          'bg-neutral-900 text-neutral-100 z-20 transform px-5 pt-16 transition-all duration-500 ease-in-out',
+          'bg-white z-20 transform px-5 pt-16 transition-all duration-500 ease-in-out',
           isStickyVisible ? 'fixed top-0 right-0 left-0' : 'absolute inset-x-0 top-0',
           isMenuOpen
             ? 'max-h-screen translate-y-0 opacity-100 shadow-md'
@@ -164,7 +165,22 @@ export default function MobileNavbar({
             className='min-[320px]:-bottom-12 min-[375px]:-bottom-18 min-[425px]:-bottom-24 sm:-bottom-28 md:-bottom-28 pointer-events-none absolute right-0 -bottom-10 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
           />
         )}
-      </nav>
+          {cta && showCtaInMobile && (
+            <div className='flex justify-center my-6'>
+              <Link
+                href={cta.href}
+                onClick={() => setIsMenuOpen(false)}
+                className={cn(
+                  'inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-white text-neutral-900 border border-neutral-300 hover:bg-neutral-100 transition-colors',
+                  classNames.cta
+                )}
+              >
+                {cta.title}
+                {cta.icon}
+              </Link>
+            </div>
+          )}
+        </nav>
 
       {/* Overlay to close menu on outside click */}
       <button
@@ -269,7 +285,7 @@ function BaseNavbar({
       {/* Right: hamburger */}
       <div
         className={cn(
-          'text-neutral-100 flex justify-end transition-colors duration-300',
+          'flex justify-end transition-colors duration-300',
           classNames.hamburger,
           isSticky && classNames.hamburgerSticky,
           isMenuOpen ? classNames.hamburgerOpen : ''

@@ -34,7 +34,7 @@ export const sampleIcons: NavbarIcon[] = [
   { src: FLAG_EN_SRC, locale: "en", alt: "English" },
 ];
 
-export const sampleCta: NavbarCta = {
+export const sampleCtaNoLocale: NavbarCta = {
   title: "Contact us",
   href: "/contact",
 };
@@ -44,20 +44,8 @@ export const sampleInternalProps: InternalNavbarProps = {
   items: sampleItemsWithLocale,
   icons: sampleIcons,
   locales: ["it", "en"],
-  cta: { ...sampleCta, href: "/it/contact" }, // TODO: check this
-  homeHref: "/it",
+  cta: { title: "Contact us", href: "/en/contact" },
+  homeHref: "/en",
   logoSrc: LOGO_SRC,
   logoAlt: "Navbar Logo",
-  brandName: "MyBrand",
 };
-
-export const manyItems: NavbarItem[] = [
-  { title: "Home", href: "/it", ariaLabel: "Home" },
-  { title: "About", href: "/it/about", ariaLabel: "About" },
-  { title: "Services", href: "/it/services", ariaLabel: "Services" },
-  { title: "Portfolio", href: "/it/portfolio", ariaLabel: "Portfolio" },
-  { title: "Blog", href: "/it/blog", ariaLabel: "Blog" },
-  { title: "Careers", href: "/it/careers", ariaLabel: "Careers" },
-  { title: "Press", href: "/it/press", ariaLabel: "Press" },
-  { title: "Contact", href: "/it/contact", ariaLabel: "Contact" },
-];
