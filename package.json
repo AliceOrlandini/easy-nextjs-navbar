@@ -36,7 +36,7 @@
     }
   },
   "bin": {
-    "easy-nextjs-navbar": "./dist/cli.cjs"
+    "easy-nextjs-navbar": "./dist/cli-entry.cjs"
   },
   "files": [
     "dist"

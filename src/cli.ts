@@ -1,7 +1,6 @@
 import { access, readFile, readdir, writeFile } from 'fs/promises';
 import { createRequire } from 'module';
 import { dirname, join, relative, resolve } from 'path';
-import { pathToFileURL } from 'url';
 import process from 'process';
 
 const require = createRequire(import.meta.url);
@@ -228,7 +227,7 @@ function printUsage() {
   ].join('\n'));
 }
 
-async function main() {
+export async function main() {
   const command = process.argv[2];
 
   if (!command || command === '--help' || command === '-h') {
@@ -259,12 +258,4 @@ async function main() {
   } else {
     console.log(`No changes needed: ${result.filePath} was already configured for Tailwind v${result.version}.`);
   }
-}
-
-if (process.argv[1] && pathToFileURL(resolve(process.argv[1])).href === import.meta.url) {
-  main().catch((error: unknown) => {
-    const message = error instanceof Error ? error.message : String(error);
-    console.error(message);
-    process.exitCode = 1;
-  });
 }

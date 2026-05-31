@@ -20,7 +20,7 @@ async function postBuild() {
   );
 
   try {
-    await chmod(join(dir, 'cli.cjs'), 0o755);
+    await chmod(join(dir, 'cli-entry.cjs'), 0o755);
   } catch {
     // Best-effort: if chmod is unavailable or fails, the package still builds.
   }
@@ -60,7 +60,7 @@ export default defineConfig([
     onSuccess: postBuild,
   },
   {
-    entry: ['src/cli.ts'],
+    entry: ['src/cli-entry.ts'],
     format: ['cjs'],
     dts: false,
     clean: false,
