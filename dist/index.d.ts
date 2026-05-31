@@ -66,6 +66,8 @@ type NavbarClassNames = {
     mobileOverlay?: string;
     /** Fixed sticky bar wrapper */
     stickyBar?: string;
+    /** Optional decorative navbar bottom image */
+    decorativeBorder?: string;
 };
 type NavbarProps = {
     /** Current locale string, e.g. 'it' or 'en'. Omit for non-localized apps */

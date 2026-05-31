@@ -151,20 +151,6 @@ export default function MobileNavbar({
           ))}
         </ul>
 
-        {decorativeBorderSrc && (
-          <Image
-            src={decorativeBorderSrc}
-            loading='lazy'
-            alt=''
-            aria-hidden='true'
-            role='presentation'
-            tabIndex={-1}
-            draggable={false}
-            width={1920}
-            height={120}
-            className='min-[320px]:-bottom-12 min-[375px]:-bottom-18 min-[425px]:-bottom-24 sm:-bottom-28 md:-bottom-28 pointer-events-none absolute right-0 -bottom-10 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
-          />
-        )}
           {cta && showCtaInMobile && (
             <div className='flex justify-center my-6'>
               <Link
@@ -180,7 +166,35 @@ export default function MobileNavbar({
               </Link>
             </div>
           )}
+          {decorativeBorderSrc && (
+            <Image
+              src={decorativeBorderSrc}
+              loading='lazy'
+              alt=''
+              aria-hidden='true'
+              role='presentation'
+              tabIndex={-1}
+              draggable={false}
+              width={1920}
+              height={120}
+              className='pointer-events-none absolute right-0 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
+            />
+          )}
         </nav>
+        {decorativeBorderSrc && (
+          <Image
+            src={decorativeBorderSrc}
+            loading='lazy'
+            alt=''
+            aria-hidden='true'
+            role='presentation'
+            tabIndex={-1}
+            draggable={false}
+            width={1920}
+            height={120}
+            className='pointer-events-none absolute right-0 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
+          />
+        )}
 
       {/* Overlay to close menu on outside click */}
       <button

@@ -86,6 +86,7 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
     activeMatchMode = 'exact',
     showBackground,
     ctaPlacement = 'actions',
+    decorativeBorderSrc,
   } = props;
 
   const config = LAYOUT_CONFIG[layout];
@@ -170,22 +171,38 @@ function BaseNavbar(props: InternalNavbarProps & { showBackground?: boolean }) {
   const [leftSlot, centerSlot, rightSlot] = config.slots;
 
   return (
-    <nav
-      className={cn(
-        `grid max-h-20 items-center px-10 py-3 ${config.gridCols}`,
-        classNames.nav,
-        showBackground && classNames.stickyBar
+    <div>
+      <nav
+        className={cn(
+          `grid max-h-20 items-center px-10 py-3 ${config.gridCols}`,
+          classNames.nav,
+          showBackground && classNames.stickyBar
+        )}
+      >
+        <div className='z-50 flex min-w-0 items-center gap-4'>
+          {slotElements[leftSlot]}
+        </div>
+        <div className='z-50 flex justify-center'>
+          {slotElements[centerSlot]}
+        </div>
+        <div className={cn('z-50 flex min-w-0', config.navJustify)}>
+          {slotElements[rightSlot]}
+        </div>
+      </nav>
+      {decorativeBorderSrc && (
+        <Image
+          src={decorativeBorderSrc}
+          loading='lazy'
+          alt=''
+          aria-hidden='true'
+          role='presentation'
+          tabIndex={-1}
+          draggable={false}
+          width={1920}
+          height={120}
+          className='pointer-events-none absolute right-0 left-0 -z-10 h-auto w-screen drop-shadow-[0_1px_0_rgba(55,65,81,0.2)] select-none'
+        />
       )}
-    >
-      <div className='z-50 flex min-w-0 items-center gap-4'>
-        {slotElements[leftSlot]}
-      </div>
-      <div className='z-50 flex justify-center'>
-        {slotElements[centerSlot]}
-      </div>
-      <div className={cn('z-50 flex min-w-0', config.navJustify)}>
-        {slotElements[rightSlot]}
-      </div>
-    </nav>
+    </div>
   );
 }

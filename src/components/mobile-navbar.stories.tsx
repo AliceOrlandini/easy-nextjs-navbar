@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import MobileNavbar from "./mobile-navbar.client";
-import { sampleInternalProps } from "../stories/fixtures/sample-props";
+import { DECORATIVE_SRC, sampleInternalProps } from "../stories/fixtures/sample-props";
 
 const meta: Meta<typeof MobileNavbar> = {
   title: "Internal/MobileNavbar",
@@ -40,4 +40,8 @@ export const CustomContainerClass: Story = {
 export const CustomCTAClass: Story = {
   name: "Mobile / Custom CTA Class",
   args: { classNames: { cta: "bg-purple-900 hover:bg-purple-950 hover:scale-105 transition-transform duration-200 rounded-md text-white" } },
+};
+export const WithDecorativeBorder: Story = {
+  name: "Mobile / With Decorative Border",
+  args: { decorativeBorderSrc: DECORATIVE_SRC },
 };

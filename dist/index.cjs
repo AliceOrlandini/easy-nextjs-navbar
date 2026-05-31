@@ -8,8 +8,8 @@ function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
 
 var dynamic__default = /*#__PURE__*/_interopDefault(dynamic);
 
-var DesktopNavbar = dynamic__default.default(() => import('./desktop-navbar-VZ7PRXYE.cjs'));
-var MobileNavbar = dynamic__default.default(() => import('./mobile-navbar.client-77S5J2MV.cjs'));
+var DesktopNavbar = dynamic__default.default(() => import('./desktop-navbar-G7CI43DR.cjs'));
+var MobileNavbar = dynamic__default.default(() => import('./mobile-navbar.client-64SOVHWK.cjs'));
 function Navbar({
   locale,
   items,

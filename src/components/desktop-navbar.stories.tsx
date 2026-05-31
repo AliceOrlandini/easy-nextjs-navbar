@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import DesktopNavbar from "./desktop-navbar";
-import { sampleInternalProps } from "../stories/fixtures/sample-props";
+import { DECORATIVE_SRC, sampleInternalProps } from "../stories/fixtures/sample-props";
 
 const meta: Meta<typeof DesktopNavbar> = {
   title: "Internal/DesktopNavbar",
@@ -53,4 +53,10 @@ export const CustomLogoClass: Story = {
 export const CustomContainerClass: Story = {
   name: 'Customization / Custom Container Class',
   args: { classNames: { container: 'drop-shadow-lg bg-white' } },
+};
+
+// Decorative border
+export const WithDecorativeBorder: Story = {
+  name: 'Decorative Border / With Decorative Border',
+  args: { decorativeBorderSrc: DECORATIVE_SRC },
 };
